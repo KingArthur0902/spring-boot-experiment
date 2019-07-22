@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+    <springProperty scop="context" name="logPath" source="log.path" defaultValue="logs"/>
+
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%method:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="app" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/app.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${logPath}/app.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <!-- 日志最大的历史 15天 -->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%method:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="network" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${logPath}/network.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!-- 按天回滚 daily -->
+            <fileNamePattern>${logPath}/network.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <!-- 日志最大的历史 15天 -->
+            <maxHistory>15</maxHistory>
+        </rollingPolicy>
+        <encoder charset="UTF-8">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36}.%method:%line - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.threadblocked.experiment.modules.network" level="TRACE" additivity="false">
+        <appender-ref ref="network"/>
+    </logger>
+
+
+    <root level="INFO" >
+        <appender-ref ref="app"/>
+    </root>
+
+</configuration>
