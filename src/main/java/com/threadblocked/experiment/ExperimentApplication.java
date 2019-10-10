@@ -12,6 +12,8 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @ComponentScan(value = "com.threadblocked")
 public class ExperimentApplication {
 
+	private String s = "123";
+
 	public static void main(String[] args) {
 		SpringApplication.run(ExperimentApplication.class, args);
 	}
