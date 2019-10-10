@@ -17,7 +17,7 @@ import java.io.InputStreamReader;
 public class CurlSupport {
 
     private String s2 = "dev";
-    private String s1 = "master";
+    private String s1 = "master1";
     private Logger log = LoggerFactory.getLogger(CurlSupport.class);
 
     public void getSomeUrl(String url) {
